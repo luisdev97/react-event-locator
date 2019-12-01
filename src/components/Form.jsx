@@ -7,12 +7,19 @@ class Form extends Component {
         name: '',
         category: ''
     }
-/*
-    const mapNews = news =>
-    news.map(report => 
-        <New key={report.url} report={report}/>
-    );
-*/
+
+    handleChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+    getFormData = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+
     renderCategories = categories => 
         categories.map(category => (
             <option 
@@ -40,13 +47,14 @@ class Form extends Component {
                <div className="uk-column-1-3@m uk-margin">
 
                     <div className="uk-margin" uk-margin="true">
-                        <input type="text" name="name" className="uk-input" placeholder="name of event or city"/>
+                        <input onChange={ this.handleChange } type="text" name="name" className="uk-input" placeholder="name of event or city"/>
                     
                     </div>
             
 
                <div className="uk-margin" uk-margin="true">
-                   <select name="category" className="uk-select">
+                   <select onChange={ this.handleChange } name="category" className="uk-select">
+                        <option> --- Select Category --- </option>
                         <CategoriesConsumer>
                             { value => this.renderCategories(value.categories) }
                         </CategoriesConsumer>
