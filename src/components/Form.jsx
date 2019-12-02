@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { CategoriesConsumer } from '../context/CategoriesContext.jsx';
+import { EventsConsumer } from '../context/EventsContext.jsx';
 
 class Form extends Component {
 
@@ -33,8 +34,16 @@ class Form extends Component {
          
     
     render() {
+        
         return (
-           <form>
+            <EventsConsumer>
+                { value => {
+                    return(
+                
+           <form onSubmit={e => {
+               e.preventDefault();
+               value.getEvents(this.state);
+           }}>
 
                <fieldset className="uk-fieldset uk-margin">
                    <legend className="uk-legend uk-text-center">
@@ -69,6 +78,9 @@ class Form extends Component {
 
                </div>
            </form>
+                )
+                    }}
+           </EventsConsumer>
 
         );
     }
